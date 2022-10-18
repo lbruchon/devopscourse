@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    networks:
+      - app-network
+    depends_on:
+      - database
+    restart: on-failure
+
+  database:
+    container_name: db
+    build:
+      context: database
+      dockerfile: Dockerfile
+    volumes:
+      - sql:/var/lib/postgresql/data
+    networks:
+      - app-network
+    restart: on-failure
+
+  httpd:
+    container_name: httpd
+    build:
+      context: httpd
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    restart: on-failure
+
+networks:
+  app-network:
+volumes:
+  sql:
