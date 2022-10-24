@@ -44,9 +44,3 @@ jobs:
           context: ./backend
           # Note: tags has to be all lower-case
           tags: ${{secrets.DOCKERHUB_USERNAME}}/devopscourse/backend
-
-      - name: Build image and push database
-        # DO the same for database
-
-      - name: Build image and push httpd
-        # DO the same for httpd
